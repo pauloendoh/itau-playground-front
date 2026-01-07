@@ -10,15 +10,13 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { RouterOutlet } from '@angular/router';
-import { AuthService } from './services/auth.service';
+import { AuthClient } from './http-clients/auth/auth.client';
 import { UserStoreService } from './services/user-store.service';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [
-    RouterOutlet,
     CommonModule,
     ReactiveFormsModule,
     MatInputModule,
@@ -35,7 +33,7 @@ export class AppComponent {
   errorMessage = signal<string | null>(null);
 
   constructor(
-    private authService: AuthService,
+    private authService: AuthClient,
     public userStore: UserStoreService
   ) {}
 
@@ -50,19 +48,19 @@ export class AppComponent {
       this.isLoading.set(true);
       this.errorMessage.set(null);
 
-      this.authService.login(this.form.getRawValue()).subscribe({
-        next: (user) => {
+      this.authService
+        .login(this.form.getRawValue())
+        .then((user) => {
           this.userStore.setUser(user);
           this.isLoading.set(false);
           this.form.reset();
-        },
-        error: (error) => {
+        })
+        .catch((error) => {
           this.errorMessage.set(
             error.error?.message || 'Login failed. Please try again.'
           );
           this.isLoading.set(false);
-        },
-      });
+        });
     }
   }
 
