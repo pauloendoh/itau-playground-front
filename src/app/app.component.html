@@ -1,5 +1,5 @@
 <div class="container">
-  @if (!userStore.user()) {
+  @if (!authStore.user()) {
   <!-- Login Form -->
   <mat-card class="login-card">
     <mat-card-header>
@@ -63,7 +63,7 @@
   <mat-card class="user-card">
     <mat-card-header>
       <mat-card-title
-        >Welcome, {{ userStore.user()?.username }}!</mat-card-title
+        >Welcome, {{ authStore.user()?.username }}!</mat-card-title
       >
     </mat-card-header>
 
@@ -71,19 +71,19 @@
       <div class="user-info">
         <div class="info-row">
           <span class="label">User ID:</span>
-          <span class="value">{{ userStore.user()?.id }}</span>
+          <span class="value">{{ authStore.user()?.id }}</span>
         </div>
         <div class="info-row">
           <span class="label">Username:</span>
-          <span class="value">{{ userStore.user()?.username }}</span>
+          <span class="value">{{ authStore.user()?.username }}</span>
         </div>
         <div class="info-row">
           <span class="label">Email:</span>
-          <span class="value">{{ userStore.user()?.email }}</span>
+          <span class="value">{{ authStore.user()?.email }}</span>
         </div>
         <div class="info-row">
           <span class="label">Created At:</span>
-          <span class="value">{{ userStore.user()?.createdAt }}</span>
+          <span class="value">{{ authStore.user()?.createdAt }}</span>
         </div>
       </div>
     </mat-card-content>

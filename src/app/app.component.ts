@@ -11,7 +11,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { AuthClient } from './http-clients/auth/auth.client';
-import { UserStoreService } from './services/user-store.service';
+import { AuthStore } from './stores/auth.store';
 
 @Component({
   selector: 'app-root',
@@ -32,10 +32,7 @@ export class AppComponent {
   isLoading = signal(false);
   errorMessage = signal<string | null>(null);
 
-  constructor(
-    private authService: AuthClient,
-    public userStore: UserStoreService
-  ) {}
+  constructor(private authService: AuthClient, public authStore: AuthStore) {}
 
   private _fb = inject(NonNullableFormBuilder);
   form = this._fb.group({
@@ -51,7 +48,7 @@ export class AppComponent {
       this.authService
         .login(this.form.getRawValue())
         .then((user) => {
-          this.userStore.setUser(user);
+          this.authStore.setUser(user);
           this.isLoading.set(false);
           this.form.reset();
         })
@@ -65,6 +62,6 @@ export class AppComponent {
   }
 
   onLogout() {
-    this.userStore.clearUser();
+    this.authStore.setUser(null);
   }
 }
