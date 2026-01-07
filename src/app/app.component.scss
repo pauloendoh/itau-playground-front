@@ -1,0 +1,54 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.login-card,
+.user-card {
+  max-width: 450px;
+  width: 100%;
+}
+
+.full-width {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.error-message {
+  color: #f44336;
+  margin-bottom: 16px;
+  padding: 8px;
+  border-radius: 4px;
+  background-color: rgba(244, 67, 54, 0.1);
+}
+
+.user-info {
+  margin: 20px 0;
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.label {
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.value {
+  color: rgba(255, 255, 255, 0.87);
+}
+
+mat-card-actions {
+  padding: 16px;
+}
