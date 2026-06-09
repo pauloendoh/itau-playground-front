@@ -11,6 +11,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { AuthClient } from './http-clients/auth/auth.client';
+import { Theme, ThemeService } from './services/theme.service';
 import { AuthStore } from './stores/auth.store';
 
 @Component({
@@ -31,8 +32,13 @@ import { AuthStore } from './stores/auth.store';
 export class AppComponent {
   isLoading = signal(false);
   errorMessage = signal<string | null>(null);
+  readonly themeService = inject(ThemeService);
 
   constructor(private authService: AuthClient, public authStore: AuthStore) {}
+
+  onThemeSelect(theme: Theme) {
+    this.themeService.applyTheme(theme);
+  }
 
   private _fb = inject(NonNullableFormBuilder);
   form = this._fb.group({

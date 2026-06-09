@@ -1,3 +1,15 @@
+<div class="theme-switcher">
+  @for (t of themeService.themes; track t.value) {
+  <button
+    mat-button
+    [class.active]="themeService.theme() === t.value"
+    (click)="onThemeSelect(t.value)"
+  >
+    {{ t.label }}
+  </button>
+  }
+</div>
+
 <div class="container">
   @if (!authStore.user()) {
   <!-- Login Form -->

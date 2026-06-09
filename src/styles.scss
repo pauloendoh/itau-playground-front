@@ -1,10 +1,52 @@
-/* You can add global styles to this file, and also import other style files */
+// Imports Material's SCSS tookit so you can call functions/mixins
+@use "@angular/material" as mat;
+
+// A mixin with foundational CSS that all Material components depend on
+@include mat.core();
+
+// $light-theme:Just a SCSS variable
+$light-theme: mat.define-light-theme(
+  (
+    // mat.define-light-theme is a function that takes a map of options and returns a theme object
+    color: (
+        primary: mat.define-palette(mat.$deep-purple-palette),
+        accent: mat.define-palette(mat.$amber-palette),
+      ),
+    typography: mat.define-typography-config(),
+    density: 0
+  )
+);
+
+$dark-theme: mat.define-dark-theme(
+  (
+    color: (
+      primary: mat.define-palette(mat.$deep-purple-palette),
+      accent: mat.define-palette(mat.$amber-palette),
+    ),
+  )
+);
+
+@include mat.all-component-themes($light-theme);
+
+.dark-theme {
+  @include mat.all-component-colors($dark-theme);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  transition:
+    background-color 300ms cubic-bezier(0.34, 0.88, 0.34, 1),
+    color 300ms cubic-bezier(0.34, 0.88, 0.34, 1);
+}
+
+:root {
+  color-scheme: light dark;
+}
 
 html,
 body {
   height: 100%;
-}
-body {
-  margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
 }
