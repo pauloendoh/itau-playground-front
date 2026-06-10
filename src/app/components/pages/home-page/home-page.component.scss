@@ -1,0 +1,27 @@
+.user-card {
+  max-width: 450px;
+  width: 100%;
+}
+
+.user-info {
+  margin: 20px 0;
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.label {
+  font-weight: 500;
+}
+
+mat-card-actions {
+  padding: 16px;
+}

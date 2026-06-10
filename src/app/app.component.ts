@@ -10,6 +10,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { HomePageComponent } from './components/pages/home-page/home-page.component';
 import { AuthClient } from './http-clients/auth/auth.client';
 import { Theme, ThemeService } from './services/theme.service';
 import { AuthStore } from './stores/auth.store';
@@ -25,6 +26,7 @@ import { AuthStore } from './stores/auth.store';
     MatIconModule,
     MatButtonModule,
     MatFormFieldModule,
+    HomePageComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
@@ -67,7 +69,4 @@ export class AppComponent {
     }
   }
 
-  onLogout() {
-    this.authStore.setUser(null);
-  }
 }
