@@ -1,6 +1,6 @@
 import { Injectable, Renderer2, RendererFactory2, signal } from '@angular/core';
 
-export type Theme = 'light' | 'dark' | 'system';
+export type Theme = 'light' | 'dark';
 
 const STORAGE_KEY = 'color-scheme';
 
@@ -18,22 +18,10 @@ export class ThemeService {
     return this.#themeSignal.asReadonly();
   }
 
-  get themes() {
-    return [
-      { value: 'light' as Theme, label: 'Light' },
-      { value: 'dark' as Theme, label: 'Dark' },
-      { value: 'system' as Theme, label: 'System' },
-    ];
-  }
-
   applyTheme(theme: Theme) {
-    const scheme = theme === 'system' ? 'light dark' : theme;
-    const isDark =
-      theme === 'dark' ||
-      (theme === 'system' &&
-        window.matchMedia('(prefers-color-scheme: dark)').matches);
+    const isDark = theme === 'dark';
 
-    this.#renderer.setStyle(document.documentElement, 'color-scheme', scheme);
+    this.#renderer.setStyle(document.documentElement, 'color-scheme', theme);
 
     if (isDark) {
       this.#renderer.addClass(document.documentElement, 'dark-theme');
@@ -47,7 +35,6 @@ export class ThemeService {
 
   #getInitialTheme(): Theme {
     const stored = localStorage.getItem(STORAGE_KEY) as Theme | null;
-    const valid: Theme[] = ['light', 'dark', 'system'];
-    return valid.includes(stored!) ? stored! : 'system';
+    return stored === 'dark' ? 'dark' : 'light';
   }
 }
