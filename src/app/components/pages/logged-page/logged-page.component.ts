@@ -5,13 +5,13 @@ import { AuthStore } from '../../../stores/auth.store';
 import { ThemeSwitcherComponent } from '../../_shared/theme-switcher/theme-switcher.component';
 
 @Component({
-  selector: 'app-home-page',
+  selector: 'app-logged-page',
   standalone: true,
   imports: [MatCardModule, MatButtonModule, ThemeSwitcherComponent],
-  templateUrl: './home-page.component.html',
-  styleUrl: './home-page.component.scss',
+  templateUrl: './logged-page.component.html',
+  styleUrl: './logged-page.component.scss',
 })
-export class HomePageComponent {
+export class LoggedPageComponent {
   readonly authStore = inject(AuthStore);
 
   onLogout() {
