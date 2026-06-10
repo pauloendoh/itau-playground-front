@@ -2,6 +2,6 @@
   @if (!authStore.user()) {
     <app-landing-page />
   } @else {
-    <app-logged-page />
+    <router-outlet />
   }
 </div>

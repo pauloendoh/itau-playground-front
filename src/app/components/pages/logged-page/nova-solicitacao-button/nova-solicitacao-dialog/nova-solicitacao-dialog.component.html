@@ -1,0 +1,19 @@
+<h2 mat-dialog-title>Nova Solicitação</h2>
+
+<mat-dialog-content>
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Tipo</mat-label>
+    <mat-select [(ngModel)]="selectedTipo">
+      @for (tipo of tipos; track tipo.value) {
+        <mat-option [value]="tipo.value">{{ tipo.label }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="cancel()">Cancelar</button>
+  <button mat-raised-button color="primary" [disabled]="!selectedTipo" (click)="confirm()">
+    Continuar
+  </button>
+</mat-dialog-actions>
