@@ -1,7 +1,5 @@
-<div class="container">
-  @if (!authStore.user()) {
-    <app-landing-page />
-  } @else {
-    <router-outlet />
-  }
-</div>
+@if (!authStore.user()) {
+  <app-landing-page />
+} @else {
+  <router-outlet />
+}

@@ -1,9 +1,16 @@
 import { Routes } from '@angular/router';
+import { LoggedLayoutComponent } from './components/layouts/logged-layout/logged-layout.component';
 import { LoggedPageComponent } from './components/pages/logged-page/logged-page.component';
 import { SolicitacaoPageComponent } from './components/pages/solicitacao-page/solicitacao-page.component';
 import { urls } from './utils/constants/urls';
 
 export const routes: Routes = [
-  { path: '', component: LoggedPageComponent },
-  { path: urls.pages.novaSolicitacao, component: SolicitacaoPageComponent },
+  {
+    path: '',
+    component: LoggedLayoutComponent,
+    children: [
+      { path: '', component: LoggedPageComponent },
+      { path: urls.pages.novaSolicitacao, component: SolicitacaoPageComponent },
+    ],
+  },
 ];

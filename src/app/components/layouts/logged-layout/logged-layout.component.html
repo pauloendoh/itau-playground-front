@@ -1,0 +1,11 @@
+<mat-toolbar>
+  <span class="spacer"></span>
+  <app-theme-switcher />
+  <button mat-icon-button (click)="onLogout()">
+    <mat-icon>logout</mat-icon>
+  </button>
+</mat-toolbar>
+
+<app-container>
+  <router-outlet />
+</app-container>

@@ -1,5 +1,9 @@
 import { Component, inject, signal } from '@angular/core';
-import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  NonNullableFormBuilder,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -7,6 +11,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { AuthClient } from '../../../http-clients/auth/auth.client';
 import { AuthStore } from '../../../stores/auth.store';
+import { ContainerComponent } from '../../_shared/boxes/container/container.component';
 
 @Component({
   selector: 'app-landing-page',
@@ -18,6 +23,7 @@ import { AuthStore } from '../../../stores/auth.store';
     MatIconModule,
     MatButtonModule,
     MatFormFieldModule,
+    ContainerComponent,
   ],
   templateUrl: './landing-page.component.html',
   styleUrl: './landing-page.component.scss',
@@ -49,7 +55,7 @@ export class LandingPageComponent {
         })
         .catch((error) => {
           this.errorMessage.set(
-            error.error?.message || 'Login failed. Please try again.'
+            error.error?.message || 'Login failed. Please try again.',
           );
           this.isLoading.set(false);
         });
