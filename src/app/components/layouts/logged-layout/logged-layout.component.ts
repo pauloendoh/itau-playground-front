@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterOutlet } from '@angular/router';
 import { AuthStore } from '../../../stores/auth.store';
 import { ContainerComponent } from '../../_shared/boxes/container/container.component';
@@ -15,6 +16,7 @@ import { ThemeSwitcherComponent } from '../../_shared/theme-switcher/theme-switc
     MatToolbarModule,
     MatButtonModule,
     MatIconModule,
+    MatTooltipModule,
     ThemeSwitcherComponent,
     ContainerComponent,
   ],
