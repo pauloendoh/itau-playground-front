@@ -1,12 +1,3 @@
-<div class="theme-switcher">
-  <mat-slide-toggle
-    [checked]="themeService.theme() === 'dark'"
-    (change)="onThemeSelect($event.checked ? 'dark' : 'light')"
-  >
-    Dark mode
-  </mat-slide-toggle>
-</div>
-
 <div class="container">
   @if (!authStore.user()) {
     <app-landing-page />
