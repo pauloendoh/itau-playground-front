@@ -13,7 +13,12 @@
 
 <mat-dialog-actions align="end">
   <button mat-button (click)="cancel()">Cancelar</button>
-  <button mat-raised-button color="primary" [disabled]="!selectedTipo" (click)="confirm()">
+  <button
+    mat-raised-button
+    color="primary"
+    [disabled]="!selectedTipo"
+    (click)="confirm()"
+  >
     Continuar
   </button>
 </mat-dialog-actions>

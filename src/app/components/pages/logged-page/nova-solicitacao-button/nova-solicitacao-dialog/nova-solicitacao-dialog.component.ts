@@ -25,6 +25,7 @@ const TIPOS: { value: TipoFormulario; label: string }[] = [
     FormsModule,
   ],
   templateUrl: './nova-solicitacao-dialog.component.html',
+  styleUrl: './nova-solicitacao-dialog.component.scss',
 })
 export class NovaSolicitacaoDialogComponent {
   readonly tipos = TIPOS;
