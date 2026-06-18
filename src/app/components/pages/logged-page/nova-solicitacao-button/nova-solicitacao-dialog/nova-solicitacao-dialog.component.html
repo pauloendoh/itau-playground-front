@@ -3,22 +3,24 @@
 <mat-dialog-content>
   <mat-form-field appearance="outline" class="full-width">
     <mat-label>Tipo</mat-label>
-    <mat-select [(ngModel)]="selectedTipo">
-      @for (tipo of tipos; track tipo.value) {
+    <input
+      matInput
+      [formControl]="tipoControl"
+      [matAutocomplete]="auto"
+      placeholder="Selecione um tipo"
+    />
+    <mat-autocomplete
+      #auto="matAutocomplete"
+      [displayWith]="displayFn"
+      (optionSelected)="onTipoSelected($event)"
+    >
+      @for (tipo of filteredTipos; track tipo.value) {
         <mat-option [value]="tipo.value">{{ tipo.label }}</mat-option>
       }
-    </mat-select>
+    </mat-autocomplete>
   </mat-form-field>
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">
   <button mat-button (click)="cancel()">Cancelar</button>
-  <button
-    mat-raised-button
-    color="primary"
-    [disabled]="!selectedTipo"
-    (click)="confirm()"
-  >
-    Continuar
-  </button>
 </mat-dialog-actions>

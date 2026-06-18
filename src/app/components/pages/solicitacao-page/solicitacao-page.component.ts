@@ -1,5 +1,9 @@
 import { Component, inject, signal } from '@angular/core';
-import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  NonNullableFormBuilder,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -21,17 +25,18 @@ import { urls } from '../../../utils/constants/urls';
   template: `
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
       <mat-form-field>
-        <mat-label>CPF/CNPJ do cliente</mat-label>
+        <mat-label>CPF/CNPJ</mat-label>
         <input
           matInput
           [formControl]="form.controls.documento"
           placeholder="000.000.000-00"
+          autofocus
           (input)="onDocumentoChange()"
         />
       </mat-form-field>
 
       <mat-form-field>
-        <mat-label>Nome do cliente</mat-label>
+        <mat-label>Cliente</mat-label>
         <input matInput [formControl]="form.controls.nomeCliente" />
       </mat-form-field>
 
