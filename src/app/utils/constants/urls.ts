@@ -7,5 +7,7 @@ export const urls = {
   },
   api: {
     authLogin: `${apiBaseUrl}/auth/login`,
+    clienteByDocumento: (documento: string) =>
+      `${apiBaseUrl}/clientes/${documento}`,
   },
 } as const;
