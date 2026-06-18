@@ -3,10 +3,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { urls } from '../../../../utils/constants/urls';
-import {
-  NovaSolicitacaoDialogComponent,
-  TipoFormulario,
-} from './nova-solicitacao-dialog/nova-solicitacao-dialog.component';
+import { TipoFormulario } from '../../../../utils/types/tipo-formulario';
+import { NovaSolicitacaoDialogComponent } from './nova-solicitacao-dialog/nova-solicitacao-dialog.component';
 
 @Component({
   selector: 'app-nova-solicitacao-button',

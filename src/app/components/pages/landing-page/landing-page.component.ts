@@ -9,7 +9,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { AuthClient } from '../../../http-clients/auth/auth.client';
+import { AuthHttpClient } from '../../../http-clients/auth/auth.http-client';
 import { AuthStore } from '../../../stores/auth.store';
 import { ContainerComponent } from '../../_shared/boxes/container/container.component';
 
@@ -33,7 +33,7 @@ export class LandingPageComponent {
   errorMessage = signal<string | null>(null);
 
   private _fb = inject(NonNullableFormBuilder);
-  private authService = inject(AuthClient);
+  private authService = inject(AuthHttpClient);
   private authStore = inject(AuthStore);
 
   form = this._fb.group({

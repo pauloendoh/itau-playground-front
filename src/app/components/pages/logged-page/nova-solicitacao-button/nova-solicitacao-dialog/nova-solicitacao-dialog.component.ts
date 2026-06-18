@@ -4,9 +4,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
-
-// TODO: deixar isso em um arquivo separado, tipando com Record
-export type TipoFormulario = 'Bndes' | 'CreditoRural';
+import { TipoFormulario } from '../../../../../utils/types/tipo-formulario';
 
 // TODO: deixar isso em um arquivo separado, tipando com Record
 const TIPOS: { value: TipoFormulario; label: string }[] = [
