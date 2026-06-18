@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, inject, signal, ViewChild } from '@angular/core';
 import {
   NonNullableFormBuilder,
   ReactiveFormsModule,
@@ -27,10 +27,10 @@ import { urls } from '../../../utils/constants/urls';
       <mat-form-field>
         <mat-label>CPF/CNPJ</mat-label>
         <input
+          #documentoInput
           matInput
           [formControl]="form.controls.documento"
           placeholder="000.000.000-00"
-          autofocus
           (input)="onDocumentoChange()"
         />
       </mat-form-field>
@@ -56,12 +56,19 @@ import { urls } from '../../../utils/constants/urls';
     </form>
   `,
 })
-export class SolicitacaoPageComponent {
+export class SolicitacaoPageComponent implements AfterViewInit {
+  @ViewChild('documentoInput') documentoInput!: ElementRef<HTMLInputElement>;
   private fb = inject(NonNullableFormBuilder);
   private clienteHttpClient = inject(ClienteHttpClient);
   private formularioHttpClient = inject(FormularioHttpClient);
   private snackBar = inject(MatSnackBar);
   private router = inject(Router);
+
+  ngAfterViewInit() {
+    setTimeout(() => {
+      this.documentoInput.nativeElement.focus();
+    }, 250);
+  }
 
   codCliente = signal<string | null>(null);
   isSubmitting = signal(false);
