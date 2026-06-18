@@ -9,5 +9,6 @@ export const urls = {
     authLogin: `${apiBaseUrl}/auth/login`,
     clienteByDocumento: (documento: string) =>
       `${apiBaseUrl}/clientes/${documento}`,
+    formularios: `${apiBaseUrl}/formularios`,
   },
 } as const;
