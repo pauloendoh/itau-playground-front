@@ -1,5 +1,5 @@
 import { Component, inject, signal } from '@angular/core';
-import { NonNullableFormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -12,14 +12,19 @@ import { urls } from '../../../utils/constants/urls';
 @Component({
   selector: 'app-solicitacao-page',
   standalone: true,
-  imports: [ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatButtonModule],
+  imports: [
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+  ],
   template: `
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
       <mat-form-field>
         <mat-label>CPF/CNPJ do cliente</mat-label>
         <input
           matInput
-          formControlName="documento"
+          [formControl]="form.controls.documento"
           placeholder="000.000.000-00"
           (input)="onDocumentoChange()"
         />
@@ -27,14 +32,19 @@ import { urls } from '../../../utils/constants/urls';
 
       <mat-form-field>
         <mat-label>Nome do cliente</mat-label>
-        <input matInput formControlName="nomeCliente" />
+        <input matInput [formControl]="form.controls.nomeCliente" />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>CAR</mat-label>
+        <input matInput [formControl]="form.controls.codigoCar" />
       </mat-form-field>
 
       <button
         mat-raised-button
         color="primary"
         type="submit"
-        [disabled]="!codCliente() || isSubmitting()"
+        [disabled]="!codCliente() || form.invalid || isSubmitting()"
       >
         Enviar
       </button>
@@ -54,6 +64,7 @@ export class SolicitacaoPageComponent {
   form = this.fb.group({
     documento: [''],
     nomeCliente: [{ value: '', disabled: true }],
+    codigoCar: ['', Validators.required],
   });
 
   async onDocumentoChange() {
@@ -61,13 +72,16 @@ export class SolicitacaoPageComponent {
     if (digits.length !== 11 && digits.length !== 14) return;
 
     try {
-      const cliente = await this.clienteHttpClient.getClienteByDocumento(digits);
+      const cliente =
+        await this.clienteHttpClient.getClienteByDocumento(digits);
       this.form.controls.nomeCliente.setValue(cliente.nomeCliente);
       this.codCliente.set(cliente.codCliente);
     } catch {
       this.form.controls.nomeCliente.setValue('');
       this.codCliente.set(null);
-      this.snackBar.open('Cliente não encontrado', 'Fechar', { duration: 4000 });
+      this.snackBar.open('Cliente não encontrado', 'Fechar', {
+        duration: 4000,
+      });
     }
   }
 
@@ -82,14 +96,19 @@ export class SolicitacaoPageComponent {
         tipoFormulario: 'Bndes',
         situacaoFormulario: 'Rascunho',
         codCliente,
+        codigoCar: this.form.getRawValue().codigoCar,
         detalhesSolicitacao: '',
         detalhesAnalise: '',
       });
 
-      this.snackBar.open('Formulário criado com sucesso!', 'Fechar', { duration: 4000 });
+      this.snackBar.open('Formulário criado com sucesso!', 'Fechar', {
+        duration: 4000,
+      });
       this.router.navigate([urls.pages.index]);
     } catch {
-      this.snackBar.open('Erro ao criar formulário', 'Fechar', { duration: 4000 });
+      this.snackBar.open('Erro ao criar formulário', 'Fechar', {
+        duration: 4000,
+      });
     } finally {
       this.isSubmitting.set(false);
     }

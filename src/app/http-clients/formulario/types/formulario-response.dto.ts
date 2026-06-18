@@ -5,6 +5,7 @@ export interface FormularioResponseDto {
   tipoFormulario: TipoFormulario;
   situacaoFormulario: string;
   codCliente: string;
+  codigoCar: string | null;
   detalhesSolicitacao: string;
   detalhesAnalise: string;
 }
