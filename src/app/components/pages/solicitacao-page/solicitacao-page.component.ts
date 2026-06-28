@@ -104,7 +104,6 @@ export class SolicitacaoPageComponent implements AfterViewInit {
     this.isSubmitting.set(true);
     try {
       await this.formularioHttpClient.createFormulario({
-        codFormulario: this.generateCodFormulario(),
         tipoFormulario: 'Bndes',
         situacaoFormulario: 'Rascunho',
         codCliente,
@@ -126,15 +125,4 @@ export class SolicitacaoPageComponent implements AfterViewInit {
     }
   }
 
-  private generateCodFormulario(): string {
-    const now = new Date();
-    return [
-      now.getFullYear(),
-      String(now.getMonth() + 1).padStart(2, '0'),
-      String(now.getDate()).padStart(2, '0'),
-      String(now.getHours()).padStart(2, '0'),
-      String(now.getMinutes()).padStart(2, '0'),
-      String(now.getSeconds()).padStart(2, '0'),
-    ].join('');
-  }
 }
