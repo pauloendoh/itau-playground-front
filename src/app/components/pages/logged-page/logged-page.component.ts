@@ -10,7 +10,12 @@ import { NovaSolicitacaoButtonComponent } from './nova-solicitacao-button/nova-s
 @Component({
   selector: 'app-logged-page',
   standalone: true,
-  imports: [MatCardModule, MatButtonModule, MatTableModule, NovaSolicitacaoButtonComponent],
+  imports: [
+    MatCardModule,
+    MatButtonModule,
+    MatTableModule,
+    NovaSolicitacaoButtonComponent,
+  ],
   templateUrl: './logged-page.component.html',
   styleUrl: './logged-page.component.scss',
 })
@@ -18,7 +23,16 @@ export class LoggedPageComponent {
   private formularioHttpClient = inject(FormularioHttpClient);
 
   formularios: FormularioResponseDto[] = [];
-  displayedColumns = ['codFormulario', 'tipoFormulario', 'situacaoFormulario', 'codigoCar'];
+  displayedColumns = [
+    'codFormulario',
+    'tipoFormulario',
+    'situacaoFormulario',
+    'codigoCar',
+  ];
+
+  protected typedRow(row: unknown): FormularioResponseDto {
+    return row as FormularioResponseDto;
+  }
 
   constructor() {
     this.formularioHttpClient
