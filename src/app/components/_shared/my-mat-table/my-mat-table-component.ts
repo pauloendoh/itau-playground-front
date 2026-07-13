@@ -1,3 +1,4 @@
+import { NgComponentOutlet } from '@angular/common';
 import { Component, computed, input } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -7,7 +8,7 @@ import { MyColumnDefs } from '../../../utils/types/my-column-def';
 @Component({
   selector: 'my-mat-table',
   standalone: true,
-  imports: [MatCardModule, MatButtonModule, MatTableModule],
+  imports: [MatCardModule, MatButtonModule, MatTableModule, NgComponentOutlet],
   templateUrl: './my-mat-table-component.html',
 })
 export class MyMatTableComponent<TDataSourceItem> {
@@ -17,6 +18,6 @@ export class MyMatTableComponent<TDataSourceItem> {
   protected _ToString = String;
 
   displayedColumns = computed(() =>
-    this.columnDefs().map((def) => def.columnId),
+    this.columnDefs().map((def) => String(def.columnId)),
   );
 }

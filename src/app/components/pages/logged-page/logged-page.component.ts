@@ -2,12 +2,15 @@ import { Component, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
-import { MatTableModule } from '@angular/material/table';
 import { FormularioHttpClient } from '../../../http-clients/formulario/formulario.http-client';
 import { FormularioResponseDto } from '../../../http-clients/formulario/types/formulario-response.dto';
-import { MyColumnDefs } from '../../../utils/types/my-column-def';
+import {
+  MyColumnDefs,
+  withComponent as buildCellComponent,
+} from '../../../utils/types/my-column-def';
 import { MyMatTableComponent } from '../../_shared/my-mat-table/my-mat-table-component';
 import { NovaSolicitacaoButtonComponent } from './nova-solicitacao-button/nova-solicitacao-button.component';
+import { SituacaoCellComponent } from './situacao-cell.component';
 
 @Component({
   selector: 'app-logged-page',
@@ -15,7 +18,6 @@ import { NovaSolicitacaoButtonComponent } from './nova-solicitacao-button/nova-s
   imports: [
     MatCardModule,
     MatButtonModule,
-    MatTableModule,
     NovaSolicitacaoButtonComponent,
     MyMatTableComponent,
   ],
@@ -31,22 +33,24 @@ export class LoggedPageComponent {
     {
       columnId: 'codFormulario',
       headerLabel: 'Nº Solicitação',
-      cellContent: (item) => item.codFormulario,
+      cellText: (item) => item.codFormulario,
     },
     {
       columnId: 'tipoFormulario',
       headerLabel: 'Tipo Formulário',
-      cellContent: (item) => item.tipoFormulario,
+      cellText: (item) => item.tipoFormulario,
     },
     {
       columnId: 'situacaoFormulario',
-      headerLabel: 'Situação Formulário',
-      cellContent: (item) => item.situacaoFormulario,
+      headerLabel: 'Situação',
+      cellComponent: buildCellComponent(SituacaoCellComponent, (item) => ({
+        situacao: item.situacaoFormulario,
+      })),
     },
     {
       columnId: 'codigoCar',
-      headerLabel: 'Código CAR',
-      cellContent: (item) => item.codigoCar ?? '-',
+      headerLabel: 'CAR',
+      cellText: (item) => item.codigoCar ?? '-',
     },
   ];
 
