@@ -1,3 +1,9 @@
+<ng-template #situacaoCell let-item>
+  <span [style.color]="item.situacaoFormulario === 'ATIVO' ? 'green' : 'red'">
+    {{ item.situacaoFormulario }}
+  </span>
+</ng-template>
+
 <app-nova-solicitacao-button />
 
-<my-mat-table [dataSource]="formularios" [columnDefs]="columnDefs" />
+<my-mat-table [dataSource]="formularios" [columnDefs]="columnDefs()" />

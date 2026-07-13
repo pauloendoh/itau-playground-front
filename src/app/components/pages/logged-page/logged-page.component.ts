@@ -1,16 +1,18 @@
-import { Component, inject } from '@angular/core';
+import {
+  Component,
+  computed,
+  inject,
+  TemplateRef,
+  viewChild,
+} from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { FormularioHttpClient } from '../../../http-clients/formulario/formulario.http-client';
 import { FormularioResponseDto } from '../../../http-clients/formulario/types/formulario-response.dto';
-import {
-  MyColumnDefs,
-  withComponent as buildCellComponent,
-} from '../../../utils/types/my-column-def';
+import { MyColumnDefs } from '../../../utils/types/my-column-def';
 import { MyMatTableComponent } from '../../_shared/my-mat-table/my-mat-table-component';
 import { NovaSolicitacaoButtonComponent } from './nova-solicitacao-button/nova-solicitacao-button.component';
-import { SituacaoCellComponent } from './situacao-cell.component';
 
 @Component({
   selector: 'app-logged-page',
@@ -22,14 +24,19 @@ import { SituacaoCellComponent } from './situacao-cell.component';
     MyMatTableComponent,
   ],
   templateUrl: './logged-page.component.html',
-  styleUrl: './logged-page.component.scss',
+  styleUrls: ['./logged-page.component.scss'],
 })
 export class LoggedPageComponent {
   private formularioHttpClient = inject(FormularioHttpClient);
 
   formularios: FormularioResponseDto[] = [];
 
-  columnDefs: MyColumnDefs<FormularioResponseDto> = [
+  situacaoCell =
+    viewChild<TemplateRef<{ $implicit: FormularioResponseDto }>>(
+      'situacaoCell',
+    );
+
+  columnDefs = computed<MyColumnDefs<FormularioResponseDto>>(() => [
     {
       columnId: 'codFormulario',
       headerLabel: 'Nº Solicitação',
@@ -43,16 +50,14 @@ export class LoggedPageComponent {
     {
       columnId: 'situacaoFormulario',
       headerLabel: 'Situação',
-      cellComponent: buildCellComponent(SituacaoCellComponent, (item) => ({
-        situacao: item.situacaoFormulario,
-      })),
+      cellTemplate: this.situacaoCell()!,
     },
     {
       columnId: 'codigoCar',
       headerLabel: 'CAR',
       cellText: (item) => item.codigoCar ?? '-',
     },
-  ];
+  ]);
 
   constructor() {
     this.formularioHttpClient
