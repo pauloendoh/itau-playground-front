@@ -5,6 +5,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatTableModule } from '@angular/material/table';
 import { FormularioHttpClient } from '../../../http-clients/formulario/formulario.http-client';
 import { FormularioResponseDto } from '../../../http-clients/formulario/types/formulario-response.dto';
+import { MyColumnDefs } from '../../../utils/types/my-column-def';
+import { MyMatTableComponent } from '../../_shared/my-mat-table/my-mat-table-component';
 import { NovaSolicitacaoButtonComponent } from './nova-solicitacao-button/nova-solicitacao-button.component';
 
 @Component({
@@ -15,6 +17,7 @@ import { NovaSolicitacaoButtonComponent } from './nova-solicitacao-button/nova-s
     MatButtonModule,
     MatTableModule,
     NovaSolicitacaoButtonComponent,
+    MyMatTableComponent,
   ],
   templateUrl: './logged-page.component.html',
   styleUrl: './logged-page.component.scss',
@@ -23,16 +26,29 @@ export class LoggedPageComponent {
   private formularioHttpClient = inject(FormularioHttpClient);
 
   formularios: FormularioResponseDto[] = [];
-  displayedColumns = [
-    'codFormulario',
-    'tipoFormulario',
-    'situacaoFormulario',
-    'codigoCar',
-  ];
 
-  protected typedRow(row: unknown): FormularioResponseDto {
-    return row as FormularioResponseDto;
-  }
+  columnDefs: MyColumnDefs<FormularioResponseDto> = [
+    {
+      columnId: 'codFormulario',
+      headerLabel: 'Nº Solicitação',
+      cellContent: (item) => item.codFormulario,
+    },
+    {
+      columnId: 'tipoFormulario',
+      headerLabel: 'Tipo Formulário',
+      cellContent: (item) => item.tipoFormulario,
+    },
+    {
+      columnId: 'situacaoFormulario',
+      headerLabel: 'Situação Formulário',
+      cellContent: (item) => item.situacaoFormulario,
+    },
+    {
+      columnId: 'codigoCar',
+      headerLabel: 'Código CAR',
+      cellContent: (item) => item.codigoCar ?? '-',
+    },
+  ];
 
   constructor() {
     this.formularioHttpClient
