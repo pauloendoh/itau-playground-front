@@ -1,8 +1,8 @@
 import { expect, test } from '@playwright/test';
 import { localStorageKeys } from '../../../app/utils/constants/local-storage-keys';
 import { urls } from '../../../app/utils/constants/urls';
-import { authHandlers, imocks } from '../../handlers/auth.handlers';
-import { applyMswHandlers } from '../../support/apply-msw-handlers';
+import { applyMswHandlers } from '../../utils/apply-msw-handlers';
+import { authHandlers, imocks } from '../../utils/handlers/auth.handlers';
 
 test.describe('Authentication flow', () => {
   test.beforeEach(async ({ page }) => {

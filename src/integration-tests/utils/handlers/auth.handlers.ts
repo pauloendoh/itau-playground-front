@@ -1,5 +1,5 @@
 import { http, HttpResponse } from 'msw';
-import { urls } from '../../app/utils/constants/urls';
+import { urls } from '../../../app/utils/constants/urls';
 
 export const imocks = {
   loggedUser: {
