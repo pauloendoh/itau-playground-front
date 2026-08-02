@@ -25,7 +25,6 @@ test.describe('Authentication flow', () => {
       await expect(page.getByLabel('Username')).toBeVisible();
       await page.getByLabel('Username').fill(imocks.loggedUser.username);
       await page.getByLabel('Password').fill('anypassword');
-      loginRequestPromise = page.waitForRequest(urls.api.authLogin);
 
       await page.getByRole('button', { name: 'Login' }).click();
     });
