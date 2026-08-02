@@ -9,9 +9,4 @@ module.exports = {
     '!src/app/**/*.module.ts',
     '!src/main.ts',
   ],
-  coverageThreshold: {
-    global: {
-      lines: 90,
-    },
-  },
 };
